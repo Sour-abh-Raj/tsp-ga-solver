@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\lucifer\Documents\Programs\Python\tsp-ga-solver\env
+set VIRTUAL_ENV=C:\Users\Lab-3\Documents\lucifer\tsp-ga-solver\env
 
 if not defined PROMPT set PROMPT=$P$G
 

@@ -150,10 +150,12 @@ def nextGeneration(currentGen, eliteSize, mutationRate):
 def geneticAlgorithm(population, popSize, eliteSize, mutationRate, generations):
     pop = initialPopulation(popSize, population)
 
-    # Print all routes
-    st.write("All Routes:")
+    # Print all routes as a single array of routes
+    all_routes = []
     for route in pop:
-        st.write(route)
+        all_routes.append(route)
+    st.write("All Routes:")
+    st.write(all_routes)
 
     st.write("Initial distance: " + str(1 / rankRoutes(pop)[0][1]))
 
@@ -171,12 +173,13 @@ def geneticAlgorithm(population, popSize, eliteSize, mutationRate, generations):
 
     return bestRoute
 
+
 def main():
     st.title("TSP GA Solver")
 
-    rerun_button = st.button("Rerun Genetic Algorithm")
+    run_button = st.button("Run Genetic Algorithm")
 
-    if rerun_button:
+    if run_button:
         run_genetic_algorithm()
 
 def run_genetic_algorithm():
@@ -195,12 +198,18 @@ def run_genetic_algorithm():
     # Run the genetic algorithm
     bestRoute = geneticAlgorithm(population=cityList, popSize=POPULATION_SIZE, eliteSize=ELITE_SIZE,
                                  mutationRate=MUTATION_RATE, generations=NUMBER_OF_GENERATIONS)
+    # Plot the best route
+    fig, ax = plt.subplots()
+    ax.plot([city.x for city in bestRoute], [city.y for city in bestRoute], 'b-')
+    ax.plot([cityList[0].x, cityList[0].x], [cityList[0].y, cityList[0].y], 'ro')
+    ax.set_title('Best Route')
+    st.pyplot(fig)
 
     # Plot the best route
-    plt.plot([city.x for city in bestRoute], [city.y for city in bestRoute], 'b-')
-    plt.plot([cityList[0].x, cityList[0].x], [cityList[0].y, cityList[0].y], 'ro')
-    plt.title('Best Route')
-    st.pyplot()
+    # plt.plot([city.x for city in bestRoute], [city.y for city in bestRoute], 'b-')
+    # plt.plot([cityList[0].x, cityList[0].x], [cityList[0].y, cityList[0].y], 'ro')
+    # plt.title('Best Route')
+    # st.pyplot()
 
 if __name__ == "__main__":
     main()
